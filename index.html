@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Ultra Seltzer: Fizzy joy, delivered" />
+    <meta property="og:description" content="We're your seltzer milkman. Ultra is a membership for infinite seltzer delivery with a wider selection than any store, all at retail prices." />
+    <meta property="og:url" content="http://www.ultraseltzer.com" />
+    <meta property="og:image" content="http://www.ultraseltzer.com/assets/logo-1200.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="favicon.png" />
+    <title>Ultra Seltzer | Fizzy joy, delivered</title>
+		<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+		<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+		<script src="airtable.browser.js"></script>
+		<script src="horizontal.js"></script>
+		<script src="index.js"></script>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="media.css">
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="row header-wrapper">
+					<div class="headline col-lg-6">
+						<div class="logo"><span>Ultra Seltzer</span></div>
+						<h1>Fizzy joy, delivered.</h1>
+            <h4>
+              Drink as many bubbles as you can. 
+              We deliver 116 different
+              seltzers to your doorstep, so you can relax
+              with fizz as often as you need.
+            </h4>
+            <ul>
+            <li>Endless deliveries for $15/month</li>
+            <li>No minimum orders, no hidden fees&mdash;just pay the membership and
+              cost of your seltzer</li>
+            <li>Now delivering to Boston, Cambridge, and Somerville</li>
+            </ul>
+            <div class="as-featured">
+              As featured in <img src="images/bg-logo.png" class="bg-logo">
+            </div>
+					</div>
+
+					<div class="main col-lg-6">
+            <div>
+              <h1 style="
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                font-weight: 500;
+            ">
+                Explore and request early access.
+              </h1>
+            </div>
+						<div id="filters" class="">
+							<div class="order-title-wrapper">
+								<div class="order-title">BRAND & FLAVOR FILTERS</div>
+								<a href="#" class="card-link clear-filter">Clear filters</a>
+							</div>
+							<div class="chips-wrapper">
+							</div>
+						</div>
+						<div id="seltzers" class="col">
+							<div class="order-title">AVAILABLE SELTZERS</div>
+							<div class="wrapper row">
+							</div>
+						</div>
+
+						<div id="order" class="">
+              <form id="test-form" class="hero-form field field-grouped
+              is-revealing">
+                <div class="form-field-wrapper" style="flex: 1;">
+                  <input type="text" class="input" name="contact_field"
+                  placeholder="Email or phone #"/>
+                  <input type="text" class="input" name="order"
+                  placeholder="Order Items" hidden/>
+                </div>
+
+                <div>
+									<button type="submit" id="submit-form" class="order-button"
+                    aria-busy="false"><span class="_ftj2sg4">Request Access</span></button>
+                </div>
+
+              </form>
+						</div>
+					</div>
+					<hr/>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="container">
+				<ul class="logos">
+					<li><img src="images/topochico.png" class="img-fluid"></li>
+					<li><img src="images/lacroix.png" class="img-fluid"></li>
+					<li><img src="images/polar.png" class="img-fluid"></li>
+					<li><img src="images/bubly.png" class="img-fluid"></li>
+				</ul>
+			</div>
+		</main>
+
+		<section class="support">
+			<div class="container">
+        <h2 class="section-title">How it works</h2>
+				<div class="row">
+					<div class="col-md-4 support-item">
+						<div class="title h4">
+							&#x1F45B&#x1F60A<br>
+              Costs what it says on the can
+						</div>
+						<div class="para">
+              No extra fee per delivery—it’s a membership; it’s a lifestyle; it’s a return to the Big Seltzer Ocean in the sky that all life crawled out of.
+						</div>
+					</div>
+
+					<div class="col-md-4 support-item">
+						<div class="title h4">
+							&#x1F3E0&nbsp;&nbsp;&nbsp;&#x1F69B&#x1F4A6<br>
+              Twice daily deliveries
+						</div>
+						<div class="para">
+              Rather than making you manage delivery times, available selection
+              in stores, and last-minute substitutions, we deliver every evening
+              from 7-9PM. And we always have your flavors in stock. If we screw it up, your order is free.
+						</div>
+					</div>
+
+					<div class="col-md-4 support-item">
+            &#x1F4F1&#x1F34B&#x1F353&#x1F351&#x1F34D<br>
+						<div class="title h4">
+              Text us for a top-up
+						</div>
+						<div class="para">
+              In a week or a couple of days, when you’re running low just put in
+              an order via text. We’ll bump you onto the next delivery time, no
+              problem.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="testimonials">
+			<div class="container">
+				<h2 class="section-title">All the Seltzerheads&trade; love us</h2>
+				<div class="row">
+					<div class="col-md-4 testimonial">
+            <div class="testimonial-wrapper">
+              <div class="avatar">
+                <img class="img-fluid rounded-circle" src="https://account.thethingsnetwork.org/api/v2/users/quandle/picture.jpg">
+              </div>
+              <div class="title">
+                Evan S.
+              </div>
+              <div class="para">
+                After two deliveries I strongly feel like this is how people will drink seltzer in the future. Having access to whatever flavor I want whenever I want is a game-changer. I will never go bubble-free again.
+              </div>
+              <div class="last-order">
+                First order:
+                <div class="bottles">
+                  <span><img class="img-fluid" src="images/puk.png" title="Polar Unicorn Kisses"></span>
+                  <span><img class="img-fluid" src="images/pmm.png" title="Polar Minotaur Mayhem"></span>
+                  <span><img class="img-fluid" src="images/prrg.png" title="Polar Ruby Red Grapefruit"></span>
+                  <span><img class="img-fluid" src="images/pcc.png" title="Polar Cranberry Cider"></span>
+                </div>
+              </div>
+            </div>
+					</div>
+
+					<div class="col-md-4 testimonial">
+            <div class="testimonial-wrapper">
+              <div class="avatar">
+                <img class="img-fluid rounded-circle" src="images/emma.jpeg">
+              </div>
+              <div class="title">
+                Emma G.
+              </div>
+              <div class="para">
+                I still feel dread thinking about the half-mile walk home from Market Basket with three packs of seltzer cans and all of my groceries—and then hauling all that up to my third-floor walkup 💀 Thanks to these guys, though, my roommates and I have as much seltzer as we can drink literally whenever we want. Now that we’ve gone Ultra, we’ll def never go back.
+              </div>
+              <div class="last-order">
+                First order:
+                <div class="bottles">
+                  <span><img class="img-fluid" src="images/topo.png" title="Topo Chico"></span>
+                  <span><img class="img-fluid" src="images/gua.png" title="Guadianello"></span>
+                  <span><img class="img-fluid" src="images/pov.png" title="Polar Orange Vanilla"></span>
+                  <span><img class="img-fluid" src="images/cdr.png" title="Canada Dry Raspberry"></span>
+                  <span><img class="img-fluid" src="images/lcmg.png" title="La Croix Melon Grapefruit"></span>
+                  <span><img class="img-fluid" src="images/lcps.png" title="La Croix Pineapple Strawberry"></span>
+                  <span><img class="img-fluid" src="images/lccl.png" title="La Croix Cherry Lime"></span>
+                  <span><img class="img-fluid" src="images/lcpf.png" title="La Croix Passionfruit"></span>
+                  <span><img class="img-fluid" src="images/lckl.png" title="La Croix Key Lime"></span>
+                </div>
+              </div>
+            </div>
+					</div>
+
+					<div class="col-md-4 testimonial">
+            <div class="testimonial-wrapper">
+              <div class="avatar">
+                <img class="img-fluid rounded-circle" src="images/chris.jpg">
+              </div>
+              <div class="title">
+                Chris K.
+              </div>
+              <div class="para">
+                Someone has finally answered my prayers and taken seltzer off my to-do list.  I don’t have a car in this city and walking cases home from the nearest grocery store has been a pain. Now I never stress about running low on nubs and I can also try new flavors without the risk of the grocery store cashier judging me.
+              </div>
+              <div class="last-order">
+                First order:
+                <div class="bottles">
+                  <span><img class="img-fluid" src="images/topo.png" title="Topo Chico"></span>
+                  <span><img class="img-fluid" src="images/psf.png" title="Polar Starfruit"></span>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+			</div>
+		</section>
+
+		<footer>
+			<div class="container">
+        <div class="social">
+          <a href="https://www.instagram.com/ultraseltzer/" target="_blank">
+            <img src="images/insta.svg">
+          </a>
+          <a href="https://www.facebook.com/ultraseltzer/" target="_blank">
+            <img src="images/fb.svg">
+          </a>
+        </div>
+				<div class="copy">
+					<b>Yours in faithful fizz.</b><br>
+					Ultra Seltzer, Inc.&copy; All rights reserved 2019.
+				</div>
+			</div>
+		</footer>
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-111130878-6', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+
+    <script>
+      window.intercomSettings = {
+        app_id: "zpc30x8d",
+				alignment: 'left',
+      };
+    </script>
+    <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/zpc30x8d';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+
+		<!-- Begin Inspectlet Asynchronous Code -->
+		<script type="text/javascript">
+		(function() {
+		window.__insp = window.__insp || [];
+		__insp.push(['wid', 514985940]);
+		var ldinsp = function(){
+		if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=514985940&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+		setTimeout(ldinsp, 0);
+		})();
+		</script>
+		<!-- End Inspectlet Asynchronous Code -->
+	</body>
+</html>
