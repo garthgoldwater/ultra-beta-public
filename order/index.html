@@ -30,6 +30,7 @@
 	</head>
 	<body>
 		<header>
+      <div id="flash"></div>
 			<div class="container">
         <div class="logo"><span>Ultra Seltzer</span></div>
         <div>
@@ -63,6 +64,7 @@
 					</div>
 
 					<div class="cart">
+            <div class="order-title">MY CART</div>
             <div class="table-wrapper table-responsive">
               <table class="table table-sm">
                 <thead>
@@ -85,26 +87,40 @@
             </div>
 
             <div class="checkout-button-wrapper">
-              <button type="submit" id="submit-form" class="order-button"
+              <button type="submit" id="checkout-form" class="order-button"
                 aria-busy="false"><span class="_ftj2sg4">Checkout</span></button>
             </div>
 					</div>
 
-					<!-- <div class="checkout"> -->
-          <!--   <form> -->
-          <!--     <div class="form&#45;field&#45;wrapper" style="flex: 1;"> -->
-          <!--       <input type="text" class="input" name="contact" -->
-          <!--       placeholder="Email or phone #" id="contact"/> -->
-          <!--       <input type="text" class="input" name="zip_code" -->
-          <!--       placeholder="Zip code" id="zip&#45;code"/> -->
-          <!--     </div> -->
-          <!--  -->
-          <!--     <div> -->
-          <!--       <button type="submit" id="submit&#45;form" class="order&#45;button" -->
-          <!--         aria&#45;busy="false"><span class="_ftj2sg4">Request Access</span></button> -->
-          <!--     </div> -->
-          <!--   </form> -->
-					<!-- </div> -->
+					<div class="checkout">
+            <form id="checkout">
+              <div class="form-field-wrapper" style="flex: 1;">
+                <div class="order-title">CHECKOUT</div>
+
+                <select id="customer-type" name="customer-type" form="checkout">
+                  <option value="new-customer">I am a new customer</option>
+                  <option value="returning-customer">I am a returning customer</option>
+                </select>
+                <input type="text" class="input" name="contact"
+                placeholder="Email or phone #" id="contact"/>
+                <input type="text" class="input" name="address"
+                placeholder="Address" id="address"/>
+                <input type="text" class="input" name="city"
+                placeholder="City" id="city"/>
+                <input type="text" class="input" name="state"
+                placeholder="State" id="state"/>
+                <input type="text" class="input" name="zip_code"
+                placeholder="Zip code" id="zip"/>
+                <input type="text" class="input" name="payment"
+                placeholder="Venmo, Paypal, or Cash App username" id="payment"/>
+              </div>
+
+              <div class="checkout-button-wrapper">
+                <button type="submit" id="submit-order" class="order-button"
+                  aria-busy="false"><span class="_ftj2sg4">Submit Order</span></button>
+              </div>
+            </form>
+					</div>
 					<hr/>
 				</div>
 			</div>

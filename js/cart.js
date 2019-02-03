@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var $shop = $(".main");
   var $cart = $(".cart");
+  var $checkout = $(".checkout");
   var $total = $(".item-total");
 
   $(".cart-icon").click(function(event) {
@@ -19,6 +20,7 @@ $(document).ready(function() {
       $icon.removeClass("close");
       $icon.html(icon);
       $cart.hide();
+      $checkout.hide();
       $shop.show();
       updateCount();
     }
