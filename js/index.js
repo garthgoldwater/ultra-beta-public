@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	var Airtable = require('airtable');
 	var base = new Airtable({ apiKey: 'keyBEJn0HFvTYTlHE' }).base('appm8eBZgJ6jhT3Dp');
+  var zips = [
+    "02139", "02238", "02142", "02141", "02133", "02143", "02215", "02163", "02134", "02199", "02456", "02115", "02116", "02114", "02446", "02145", "02108", "02138", "02222", "02203", "02117", "02137", "02112", "02455", "02123", "02266", "02283", "02196", "02201", "02204", "02206", "02241", "02211", "02217", "02284", "02293", "02297", "02120", "02129", "02113", "02111", "02118", "02447", "02109", "02110", "02205", "02140", "02144", "02153", "02135", "02119", "02298", "02445", "02210", "02130", "02149", "02127", "02472", "02121", "02125", "02477", "02471", "02155", "02467", "02458", "02150", "02128", "02478", "02212", "02156", "02474" 
+  ];
 	var flavors = [
 		"grapefruit",
 		"black cherry",
@@ -60,7 +63,7 @@ $(document).ready(function() {
 		"Guadianello",
 		"Badoit",
 		"Waterloo",
-		"Shweppes",
+		"Schweppes",
 		"Canada Dry"
 	];
 	var activeFilters = [];
@@ -81,24 +84,35 @@ $(document).ready(function() {
 		var brand = record.get("Brand").trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/, "").replace(/\s/g, "-");
 		var name = record.get("Name"); //.trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/, "").replace(/\s/g, "-");
     var url = location.href;
-    var message;
+    var message, card;
     if(url.includes("order")) {
-      message = "Add to Order";
+      card = `
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6 card mb-3 card-custom ${brand} ${flavors.join(" ")}" data-orderId="${name}">
+          <img class="card-img-top" src="${record.get("Preview Image")[0].url}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">${record.get("Brand") + " " +
+                record.get("Flavor")}</h5>
+            <p class="card-text">${record.get("Type")} | $${record.get("Price")}</p>
+            <div class="update-cart">
+              <span class="subtract">-</span>
+              <span class="quantity">0</span>
+              <span class="add">+</span>
+            </div>
+          </div>
+        </div>
+      `;
     } else {
-      message = "Add to Request";
+      card = `
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6 card mb-3 card-custom ${brand} ${flavors.join(" ")}" data-orderId="${name}">
+          <img class="card-img-top" src="${record.get("Preview Image")[0].url}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">${record.get("Brand") + " " +
+                record.get("Flavor")}</h5>
+            <p class="card-text">${record.get("Type")} | $${record.get("Price")}</p>
+          </div>
+        </div>
+      `;
     }
-
-		var card = `
-			<div class="col-lg-3 col-md-4 col-sm-6 col-6 card mb-3 card-custom ${brand} ${flavors.join(" ")}" data-orderId="${name}">
-				<img class="card-img-top" src="${record.get("Preview Image")[0].url}" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">${record.get("Brand") + " " +
-							record.get("Flavor")}</h5>
-					<p class="card-text">${record.get("Type")} | $${record.get("Price")}</p>
-					<a href="#" class="card-link add-to-order">${message}</a>
-				</div>
-			</div>
-		`;
 
 		return card;
 	};
@@ -140,9 +154,6 @@ $(document).ready(function() {
 		$grid.isotope({
 			itemSelector: '.card',
 			layoutMode: 'fitRows',
-			// masonry: {
-			// 	columnWidth: '.card'
-			// },
 			getSortData : {
 				selected : function( item ){
 					var $item = $(item);
@@ -150,86 +161,55 @@ $(document).ready(function() {
 					return ($item.hasClass('selected') ? -500 : 0) + $item.index();
 				}
 			},
-			sortBy : 'selected'
+			// sortBy : 'selected'
 		});
 	};
 
-  var setupOrderForm = function() {
-		var $form = $('form#order-form'),
-    url = 'https://script.google.com/macros/s/AKfycbz90diPxuJ6SJnSEV1yAAJzTTC1lr1bSWEFhYt31AmCygvZc34/exec';
-
-		$('#order-form #submit-form').on('click', function(e) {
-			e.preventDefault();
-      $input = $("input.input").first();
-      if($input.val() == "") {
-        console.log("don't submit");
-        $input.attr("placeholder", "Email or phone # can't be blank");
-        $input.addClass("error");
-        return;
-      }
-			var flavors = $(".card.selected").toArray().map(x => $(x).data().orderid).join(", ");
-			$("input[name='order_field']").val(flavors);
-			$("input[name='date_field']").val(new Date());
-			$("#submit-form").prop("disabled", true);
-			$("#submit-form").html("Submitting...");
-			var jqxhr = $.ajax({
-				url: url,
-				method: "GET",
-				dataType: "json",
-				data: $form.serializeObject(),
-				success: function() {
-					// do something
-					var title = $("input[name='contact_field']").val();
-					var message = `
-						<div class="success">Thanks! We'll be in touch soon!</div>
-					`;
-					$("#order-form").html(message);
-
-          try {
-            ga('send', {
-              hitType: 'event',
-              eventCategory: 'Item',
-              eventAction: 'Ordered',
-              eventLabel: title
-            });
-          } catch (e) {
-            console.log("Caught error");
-          }
-					console.log("Success!");
-				},
-			})
-		})
-  }
-
 	var setupForm = function() {
-		var $form = $('form#test-form'),
-		url = 'https://script.google.com/macros/s/AKfycbyYBmXqq4mxrBTmzDKtVn3X3WF4BJ5P_lDRVe0NIu7Xf5a7EP0/exec'
+		var $form = $('form#test-form');
 
 		$('#test-form #submit-form').on('click', function(e) {
 			e.preventDefault();
-      $input = $("input.input").first();
-      if($input.val() == "") {
-        console.log("don't submit");
-        $input.attr("placeholder", "Email or phone # can't be blank");
-        $input.addClass("error");
+      $contact = $("input#contact");
+      $zip = $("input#zip-code");
+
+      if($contact.val() == "" && $zip.val() == "") {
+        $contact.attr("placeholder", "Email or phone # can't be blank");
+        $contact.addClass("error");
+        $zip.attr("placeholder", "Zip code can't be blank");
+        $zip.addClass("error");
+        return;
+      } else if($contact.val() == "") {
+        $contact.attr("placeholder", "Email or phone # can't be blank");
+        $contact.addClass("error");
+        return;
+      } else if($zip.val() == "") {
+        $zip.attr("placeholder", "Zip code can't be blank");
+        $zip.addClass("error");
         return;
       }
-			var flavors = $(".card.selected").toArray().map(x => $(x).data().orderid).join(", ");
-			$("input[name='order']").val(flavors);
+
 			$("#submit-form").prop("disabled", true);
 			$("#submit-form").html("Submitting...");
-			var jqxhr = $.ajax({
-				url: url,
-				method: "GET",
-				dataType: "json",
-				data: $form.serializeObject(),
-				success: function() {
-					// do something
+
+      var email, phoneNumber, zip = "";
+      var inArea = zips.includes($zip.val()) ? true : false;
+      if($contact.val().includes("@") && $contact.val().includes(".")) {
+        email = $contact.val();
+      } else {
+        phoneNumber = $contact.val();
+      }
+
+      base('Leads').create({
+        "Email": email,
+        "Phone #": phoneNumber,
+        "Zip code": $zip.val(),
+        "In area?": inArea,
+        "Deal stage": "Interest",
+      }, function(err, record) {
+        if (err) { console.log(err); return; 
+        } else {
 					var title = $("input[name='contact_field']").val();
-					var message = `
-						<div class="success">Thanks! We'll be in touch soon!</div>
-					`;
-					$("#test-form").html(message);
 
           try {
             ga('send', {
@@ -241,9 +221,17 @@ $(document).ready(function() {
           } catch (e) {
             console.log("Caught error");
           }
-					console.log("Success!");
-				},
-			})
+
+          if(inArea) {
+            location.href = "/order?ref=signup";
+          } else {
+            var message = `
+              <div class="success">Thanks! We'll be in touch soon!</div>
+            `;
+            $("#test-form").html(message);
+          }
+				}
+      });
 		})
 	};
 
@@ -387,7 +375,6 @@ $(document).ready(function() {
 	// setupFiltering();
 	// Now happens in loadSeltzers.then
 	setupForm();
-	setupOrderForm();
 
 	const sr = window.sr = ScrollReveal()
 	sr.reveal('.testimonials, .support, .headline, .main', {

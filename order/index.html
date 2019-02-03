@@ -10,21 +10,23 @@
     <meta property="og:image"
     content="http://www.ultraseltzer.com/assets/logo-1200.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="icon" type="image/png" href="../images/favicon.png" />
     <title>Ultra: A Milkman for Seltzer</title>
 		<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
 		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 		<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-		<script src="../airtable.browser.js"></script>
-		<script src="../horizontal.js"></script>
-		<script src="../index.js"></script>
+		<script src="../vendor/airtable.browser.js"></script>
+		<script src="../js/horizontal.js"></script>
+		<script src="../js/index.js"></script>
+		<script src="../js/cart.js"></script>
+		<script src="../js/checkout.js"></script>
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../main.css">
-		<link rel="stylesheet" type="text/css" href="../media.css">
-		<link rel="stylesheet" type="text/css" href="./order.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<link rel="stylesheet" type="text/css" href="../css/media.css">
+		<link rel="stylesheet" type="text/css" href="../css/order.css">
 	</head>
 	<body>
 		<header>
@@ -35,10 +37,15 @@
             font-size: 1.5rem;
             font-weight: 500;
         ">
-            Explore and reorder.
+            Explore and order.
           </h1>
         </div>
 				<div class="row header-wrapper">
+          <div class="cart-wrapper">
+            <div class="cart-icon">
+              &#x1F6D2;&nbsp;&nbsp;Cart
+            </div>
+          </div>
 					<div class="main col">
 						<div id="filters" class="">
 							<div class="order-title-wrapper">
@@ -52,28 +59,52 @@
 							<div class="order-title">AVAILABLE SELTZERS</div>
 							<div class="wrapper row">
 							</div>
-
-              <div id="order" class="">
-                <form id="order-form" class="hero-form field field-grouped
-                is-revealing">
-                  <div class="form-field-wrapper" style="flex: 1;">
-                    <input type="text" class="input" name="contact_field"
-                    placeholder="Email or phone #"/>
-                    <input type="text" class="input" name="order_field"
-                    placeholder="Order Items" hidden/>
-                    <input type="text" class="input" name="date_field"
-                    placeholder="Order Time" hidden/>
-                  </div>
-
-                  <div>
-                    <button type="submit" id="submit-form" class="order-button"
-                      aria-busy="false"><span class="_ftj2sg4">Order</span></button>
-                  </div>
-
-                </form>
-              </div>
 						</div>
 					</div>
+
+					<div class="cart">
+            <div class="table-wrapper table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Seltzer</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="total">
+                    <th scope="row" class="">Total</th>
+                    <td class="item-price"></td>
+                    <td class="item-quantity"></td>
+                    <td class="item-total">$0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="checkout-button-wrapper">
+              <button type="submit" id="submit-form" class="order-button"
+                aria-busy="false"><span class="_ftj2sg4">Checkout</span></button>
+            </div>
+					</div>
+
+					<!-- <div class="checkout"> -->
+          <!--   <form> -->
+          <!--     <div class="form&#45;field&#45;wrapper" style="flex: 1;"> -->
+          <!--       <input type="text" class="input" name="contact" -->
+          <!--       placeholder="Email or phone #" id="contact"/> -->
+          <!--       <input type="text" class="input" name="zip_code" -->
+          <!--       placeholder="Zip code" id="zip&#45;code"/> -->
+          <!--     </div> -->
+          <!--  -->
+          <!--     <div> -->
+          <!--       <button type="submit" id="submit&#45;form" class="order&#45;button" -->
+          <!--         aria&#45;busy="false"><span class="_ftj2sg4">Request Access</span></button> -->
+          <!--     </div> -->
+          <!--   </form> -->
+					<!-- </div> -->
 					<hr/>
 				</div>
 			</div>

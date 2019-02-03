@@ -8,20 +8,20 @@
     <meta property="og:url" content="http://www.ultraseltzer.com" />
     <meta property="og:image" content="http://www.ultraseltzer.com/assets/logo-1200.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="icon" type="image/png" href="images/favicon.png" />
     <title>Ultra Seltzer | Fizzy joy, delivered</title>
 		<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
 		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 		<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-		<script src="airtable.browser.js"></script>
-		<script src="horizontal.js"></script>
-		<script src="index.js"></script>
+		<script src="vendor/airtable.browser.js"></script>
+		<script src="js/horizontal.js"></script>
+		<script src="js/index.js"></script>
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="stylesheet" type="text/css" href="media.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/media.css">
 	</head>
 	<body>
 		<header>
@@ -75,10 +75,10 @@
               <form id="test-form" class="hero-form field field-grouped
               is-revealing">
                 <div class="form-field-wrapper" style="flex: 1;">
-                  <input type="text" class="input" name="contact_field"
-                  placeholder="Email or phone #"/>
-                  <input type="text" class="input" name="order"
-                  placeholder="Order Items" hidden/>
+                  <input type="text" class="input" name="contact"
+                  placeholder="Email or phone #" id="contact"/>
+                  <input type="text" class="input" name="zip_code"
+                  placeholder="Zip code" id="zip-code"/>
                 </div>
 
                 <div>

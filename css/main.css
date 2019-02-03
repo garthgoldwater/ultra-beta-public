@@ -237,6 +237,8 @@ a.card-link {
 	border-color: var(--color-buttons-primary-border, transparent) !important;
 	color: var(--color-buttons-primary-text, #ffffff) !important;
 	background: #3b81ff !important;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .headline {
@@ -262,7 +264,7 @@ a.card-link {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 15px;
-	min-height: 50px;
+	min-height: 100px;
 	flex: 0;
 }
 
@@ -397,7 +399,7 @@ footer {
 
 form#test-form, form#order-form {
 	width: 100%;
-	flex-direction: row;
+	flex-direction: column;
 	display: flex;
 }
 
@@ -413,17 +415,23 @@ form#test-form, form#order-form {
 }
 
 input.input {
-	width: 100%;
-	height: 100%;
-	background-color: transparent !important;
-	border: 0px !important;
-	margin: 0px !important;
-	padding: 0px !important;
-	width: 100% !important;
-	text-overflow: ellipsis !important;
-	font-size: 17px !important;
-	padding-left: 12px !important;
-	padding-right: 4px !important;
+	/* width: 100%; */
+	/* height: 100%; */
+	/* background-color: transparent !important; */
+	/* border: 0px !important; */
+	/* margin: 0px !important; */
+	/* padding: 0px !important; */
+	/* width: 100% !important; */
+	/* text-overflow: ellipsis !important; */
+	/* font-size: 17px !important; */
+	/* padding-left: 12px !important; */
+	/* padding-right: 4px !important; */
+  width: 49%;
+  height: 100%;
+  display: inline-flex;
+  border: 1px solid #EBEBEB !important;
+  border-radius: 2px;
+  padding: 10px 7px;
 }
 
 #submit-form.success {
@@ -449,11 +457,17 @@ input.input {
 	display: flex;
 	background-color: #00be90;
 	color: #fff;
+  height: 100%;
 }
 
 .form-field-wrapper {
+  /* flex: 1; */
+  /* border: 1px solid #EBEBEB !important; */
   flex: 1;
-  border: 1px solid #EBEBEB !important;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border: 0 !important;
 }
 
 input.input.error::placeholder {
@@ -509,4 +523,8 @@ input.input.error::placeholder {
 img.bg-logo {
   max-height: 30px;
   margin-left: 7px;
+}
+
+button:focus {
+  outline: none;
 }
