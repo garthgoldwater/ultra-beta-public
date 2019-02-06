@@ -60,39 +60,39 @@
 							<div class="order-title">AVAILABLE SELTZERS</div>
 							<div class="wrapper row">
 							</div>
+
+              <div class="checkout-button-wrapper">
+                <button type="submit" id="checkout-form" class="order-button"
+                  aria-busy="false"><span class="_ftj2sg4">Checkout</span></button>
+              </div>
 						</div>
 					</div>
 
-					<div class="cart">
-            <div class="order-title">MY CART</div>
-            <div class="table-wrapper table-responsive">
-              <table class="table table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Seltzer</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr id="total">
-                    <th scope="row" class="">Total</th>
-                    <td class="item-price"></td>
-                    <td class="item-quantity"></td>
-                    <td class="item-total">$0.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="checkout-button-wrapper">
-              <button type="submit" id="checkout-form" class="order-button"
-                aria-busy="false"><span class="_ftj2sg4">Checkout</span></button>
-            </div>
-					</div>
-
 					<div class="checkout">
+            <div class="cart">
+              <div class="order-title">ORDER SUMMARY</div>
+              <div class="table-wrapper table-responsive">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">Seltzer</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="total">
+                      <th scope="row" class="">Total</th>
+                      <td class="item-price"></td>
+                      <td class="item-quantity"></td>
+                      <td class="item-total">$0.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <form id="checkout">
               <div class="form-field-wrapper" style="flex: 1;">
                 <div class="order-title">CHECKOUT</div>
@@ -113,6 +113,8 @@
                 placeholder="Zip code" id="zip"/>
                 <input type="text" class="input" name="payment"
                 placeholder="Venmo, Paypal, or Cash App username" id="payment"/>
+                <div class="form-note">*We only request payment after we've
+                  delivered your order.</div>
               </div>
 
               <div class="checkout-button-wrapper">

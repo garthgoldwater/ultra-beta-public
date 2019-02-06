@@ -131,6 +131,7 @@ $(document).ready(function() {
 
 	var loadSeltzers = function() {
 		base('Seltzer Inventory').select({
+      filterByFormula: "{Out of Stock} = 0",
 			sort: [
 				{field: 'Brand', direction: 'asc'}
 			]
@@ -142,11 +143,10 @@ $(document).ready(function() {
 
 			fetchNextPage();
 		}, function done(error) {
-			console.log(error);
+			// console.log(error);
 			setupFiltering();
 		});
 	};
-
 
 	var setupFiltering = function() {
 		// Setup seltzer filters
@@ -158,10 +158,11 @@ $(document).ready(function() {
 				selected : function( item ){
 					var $item = $(item);
 					// sort by selected first, then by original order
-					return ($item.hasClass('selected') ? -500 : 0) + $item.index();
+					// return ($item.hasClass('selected') ? -500 : 0) + $item.index();
+					return $item.hasClass('selected');
 				}
 			},
-			// sortBy : 'selected'
+			sortBy : 'selected'
 		});
 	};
 
@@ -214,12 +215,12 @@ $(document).ready(function() {
           try {
             ga('send', {
               hitType: 'event',
-              eventCategory: 'Item',
-              eventAction: 'Ordered',
+              eventCategory: 'User',
+              eventAction: 'Sign up',
               eventLabel: title
             });
           } catch (e) {
-            console.log("Caught error");
+            // console.log("Caught error");
           }
 
           if(inArea) {
@@ -254,7 +255,7 @@ $(document).ready(function() {
           eventLabel: title
         });
       } catch (e) {
-        console.log("Caught error");
+        // console.log("Caught error");
       }
 		} else {
 			$target.find("svg").remove();
@@ -266,53 +267,10 @@ $(document).ready(function() {
           eventLabel: title
         });
       } catch (e) {
-        console.log("Caught error");
+        // console.log("Caught error");
       }
 		}
 	}
-
-	$(document).on("click", ".add-to-order", function(event) {
-		event.preventDefault();
-		var $target = $(event.target);
-		$card = $target.parent().parent();
-		$card.addClass("selected");
-		var closeButton = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-		$target.html("Added &#10004");
-		$card.append(closeButton);
-		var title = $card.data().orderid;
-		$(".wrapper").isotope('updateSortData').isotope();
-    try {
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'Item',
-        eventAction: 'Added to order',
-        eventLabel: title
-      });
-    } catch (e) {
-      console.log("Caught error");
-    }
-		// $(".wrapper").isotope('selected');
-	});
-
-	$(document).on("click", ".card svg.x", function(event) {
-		var $target = $(event.target);
-		$card = $target.parent();
-		$card.removeClass("selected");
-		$card.children(".card-body").children(".add-to-order").html("Add to order");
-		$target.remove();
-		var title = $card.data().orderid;
-		$(".wrapper").isotope('updateSortData').isotope();
-    try {
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'Item',
-        eventAction: 'Removed from order',
-        eventLabel: title
-      });
-    } catch (e) {
-      console.log("Caught error");
-    }
-	});
 
 	$(document).on("click", ".chip", function(event) {
 		var target = event.target;

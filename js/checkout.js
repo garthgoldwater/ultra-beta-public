@@ -4,6 +4,7 @@ $(document).ready(function() {
   var $shop = $(".main");
   var $cart = $(".cart");
   var $checkout = $(".checkout");
+  var $icon = $(".cart-icon");
   if(document.referrer.includes("ultraseltzer.com") || document.referrer.includes("localhost:8000")) {
     var flash = `
       <div class="success">
@@ -18,7 +19,11 @@ $(document).ready(function() {
   }
 
   $(document).on("click", "#checkout-form", function() {
-    $cart.hide();
+    // $cart.hide();
+    icon = `Back to shopping`;
+    $icon.addClass("close");
+    $icon.html(icon);
+    $shop.hide();
     $checkout.show();
   });
 
@@ -45,6 +50,17 @@ $(document).ready(function() {
     }
   });
 
+  function clearFilter() {
+		activeFilters = [];
+		$(".wrapper").isotope({filter: '*'});
+		$(".chips-wrapper").children().show();
+		$(".chips-wrapper").scrollLeft(0)
+		$(".chip.selected").toArray().forEach(x => $(x).removeClass("selected") && $(x).find("svg").remove())
+		$(".clear-filter").hide();
+		$(".wrapper").isotope('layout');
+		$(".wrapper").scrollTop(0);
+  };
+
   var validateFields = function($inputs) {
     blank = 0;
     values = {};
@@ -66,6 +82,7 @@ $(document).ready(function() {
       }
     });
 
+    try {
     var email, phone = null;
     if(values.contact.includes("@") && values.contact.includes(".")) {
       email = values.contact;
@@ -74,6 +91,9 @@ $(document).ready(function() {
     }
     values.email = email;
     values.phone = formatPhone(phone);
+    } catch(err) {
+      console.log(err);
+    }
 
     return [blank, values];
   };
@@ -171,6 +191,7 @@ $(document).ready(function() {
 
   $(document).on("submit", "#checkout", function(event) {
     event.preventDefault();
+    $("#submit-order span").html("Submitting...");
     var blank, values;
     $target = $(event.target);
     customerType = $target.find("#customer-type").val();
@@ -180,7 +201,10 @@ $(document).ready(function() {
       $inputs = $target.find("input");
       [blank, values] = validateFields($inputs);
 
-      if(blank > 0) { return; };
+      if(blank > 0) { 
+        $("#submit-order span").html("Submit Order");
+        return; 
+      };
 
       findOrCreateUser(values)
         .then(function(user){
@@ -223,6 +247,8 @@ $(document).ready(function() {
           icon = `&#x1F6D2;&nbsp;&nbsp;Cart`;
           $icon.removeClass("close");
           $icon.html(icon);
+          clearFilter();
+          $("#submit-order span").html("Submit Order");
 
           setTimeout(function(){ 
             $("#flash .success").slideUp()
@@ -233,7 +259,10 @@ $(document).ready(function() {
       [blank, values] = validateFields($inputs);
 
       // if no fields are blank, go ahead
-      if(blank > 0) { return; };
+      if(blank > 0) { 
+        $("#submit-order span").html("Submit Order");
+        return; 
+      };
 
       var filterFormula;
       if(values.phone) {
@@ -245,7 +274,6 @@ $(document).ready(function() {
       findUser(filterFormula)
         .then(function(user){
           // create new order summary
-          console.log(user);
           if(user.length > 0) {
             return createOrderSummary(user[0]);
           } else {
@@ -299,6 +327,8 @@ $(document).ready(function() {
           icon = `&#x1F6D2;&nbsp;&nbsp;Cart`;
           $icon.removeClass("close");
           $icon.html(icon);
+          clearFilter();
+          $("#submit-order span").html("Submit");
 
           setTimeout(function(){ 
             $("#flash .success").slideUp()

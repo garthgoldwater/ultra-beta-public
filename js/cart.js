@@ -6,6 +6,9 @@ $(document).ready(function() {
 
   $(".cart-icon").click(function(event) {
     var $icon = $(event.target);
+    if($icon.hasClass("item-count")) {
+      $icon = $icon.parent();
+    };
     var cartIsOpen = !$icon.hasClass("close");
     var icon;
 
@@ -13,15 +16,17 @@ $(document).ready(function() {
       icon = `Back to shopping`;
       $icon.addClass("close");
       $icon.html(icon);
-      $shop.hide();
-      $cart.show();
+      $(".wrapper").isotope({ filter : '.selected' });
+      // $shop.hide();
+      // $cart.show();
     } else {
       icon = `&#x1F6D2;&nbsp;&nbsp;Cart`;
       $icon.removeClass("close");
       $icon.html(icon);
-      $cart.hide();
+      // $cart.hide();
       $checkout.hide();
       $shop.show();
+      $(".wrapper").isotope({ filter : '*' });
       updateCount();
     }
   });
