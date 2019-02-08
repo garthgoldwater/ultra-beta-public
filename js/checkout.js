@@ -250,6 +250,17 @@ $(document).ready(function() {
           clearFilter();
           $("#submit-order span").html("Submit Order");
 
+          try {
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Item',
+              eventAction: 'Ordered',
+              eventLabel: title
+            });
+          } catch (e) {
+            // console.log("Caught error");
+          }
+
           setTimeout(function(){ 
             $("#flash .success").slideUp()
           }, 3000);
@@ -329,6 +340,17 @@ $(document).ready(function() {
           $icon.html(icon);
           clearFilter();
           $("#submit-order span").html("Submit");
+
+          try {
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Item',
+              eventAction: 'Ordered',
+              eventLabel: title
+            });
+          } catch (e) {
+            // console.log("Caught error");
+          }
 
           setTimeout(function(){ 
             $("#flash .success").slideUp()
