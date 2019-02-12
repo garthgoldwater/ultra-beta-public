@@ -189,6 +189,30 @@ $(document).ready(function() {
     $(".item-total").html("$0.00");
   }
 
+  function validateZip() {
+    var zip = $("input[name='zip_code']").val();
+
+    if(window.zips.includes(zip)) {
+      return true;
+    } else if(zip == "") {
+      return false;
+    } else {
+      var flash = `
+        <div class="failure">
+          Sorry, we're not delivering to ${zip} just yet!
+          Email orders@ultraseltzer.com or text (617) 302-8054 for help.
+        </div>
+      `;
+
+      $(window).scrollTop(0)
+      $("#flash").append(flash);
+      setTimeout(function(){ 
+        $("#flash .failure").slideUp()
+      }, 5000);
+      return false;
+    }
+  }
+
   $(document).on("submit", "#checkout", function(event) {
     event.preventDefault();
     $("#submit-order span").html("Submitting...");
@@ -201,7 +225,7 @@ $(document).ready(function() {
       $inputs = $target.find("input");
       [blank, values] = validateFields($inputs);
 
-      if(blank > 0) { 
+      if(blank > 0 || !validateZip()) { 
         $("#submit-order span").html("Submit Order");
         return; 
       };
@@ -270,7 +294,7 @@ $(document).ready(function() {
       [blank, values] = validateFields($inputs);
 
       // if no fields are blank, go ahead
-      if(blank > 0) { 
+      if(blank > 0 || !validateZip()) { 
         $("#submit-order span").html("Submit Order");
         return; 
       };
