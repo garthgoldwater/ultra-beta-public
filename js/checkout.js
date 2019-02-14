@@ -192,8 +192,10 @@ $(document).ready(function() {
   function validateZip() {
     var zip = $("input[name='zip_code']").val();
 
-    if(window.zips.includes(zip)) {
-      return true;
+    if(window.zips.includes(zip) || customerType == "new-customer") {
+      console.log("TRUE");
+      return false;
+      // return true;
     } else if(zip == "") {
       return false;
     } else {
@@ -294,7 +296,7 @@ $(document).ready(function() {
       [blank, values] = validateFields($inputs);
 
       // if no fields are blank, go ahead
-      if(blank > 0 || !validateZip()) { 
+      if(blank > 0) { 
         $("#submit-order span").html("Submit Order");
         return; 
       };
