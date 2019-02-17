@@ -192,10 +192,8 @@ $(document).ready(function() {
   function validateZip() {
     var zip = $("input[name='zip_code']").val();
 
-    if(window.zips.includes(zip) || customerType == "new-customer") {
-      console.log("TRUE");
-      return false;
-      // return true;
+    if(window.zips.includes(zip)) {
+      return true;
     } else if(zip == "") {
       return false;
     } else {
