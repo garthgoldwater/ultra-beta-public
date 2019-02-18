@@ -89,7 +89,7 @@ $(document).ready(function() {
     } else {
       phone = values.contact;
     }
-    values.email = email;
+    values.email = formatEmail(email);
     values.phone = formatPhone(phone);
     } catch(err) {
       console.log(err);
@@ -177,6 +177,15 @@ $(document).ready(function() {
     else {
       //invalid phone number
       return phonenum;
+    }
+  }
+
+  function formatEmail(email) {
+    try{
+      var updatedEmail = email.toLowerCase();
+      return updatedEmail;
+    } catch(err) {
+      return email;
     }
   }
 
