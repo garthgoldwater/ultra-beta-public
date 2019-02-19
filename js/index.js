@@ -133,9 +133,7 @@ $(document).ready(function() {
 	var loadSeltzers = function() {
 		base('Seltzer Inventory').select({
       filterByFormula: "{Out of Stock} = 0",
-			sort: [
-				{field: 'Brand', direction: 'asc'}
-			]
+      view: 'Website View',
 		}).eachPage(function page(records, fetchNextPage) {
 			records.forEach(function(record) {
 				var card = renderSeltzer(record);
