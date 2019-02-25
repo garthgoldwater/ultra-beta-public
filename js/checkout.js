@@ -8,7 +8,7 @@ $(document).ready(function() {
   if(document.referrer.includes("ultraseltzer.com") || document.referrer.includes("localhost:8000")) {
     var flash = `
       <div class="success">
-        You're in our delivery area! You can start ordering immediately.
+        Welcome back!
       </div>
     `;
 

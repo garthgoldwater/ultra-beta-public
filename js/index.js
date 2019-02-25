@@ -165,6 +165,39 @@ $(document).ready(function() {
 		});
 	};
 
+  function findUser(filterFormula) {
+    console.log("HERE");
+    console.log(filterFormula);
+    return base('Users').select({
+      filterByFormula: filterFormula + "",
+      maxRecords: 10
+    }).all();
+  }
+
+  function formatPhone(phonenum) {
+    var regexObj = /^(?:\+?1[-. ]?)?(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (regexObj.test(phonenum)) {
+      var parts = phonenum.match(regexObj);
+      var phone = "";
+      if (parts[1]) { phone += "(" + parts[1] + ") "; }
+      phone += parts[2] + "-" + parts[3];
+      return phone;
+    }
+    else {
+      //invalid phone number
+      return phonenum;
+    }
+  }
+
+  function formatEmail(email) {
+    try{
+      var updatedEmail = email.toLowerCase();
+      return updatedEmail;
+    } catch(err) {
+      return email;
+    }
+  }
+
 	var setupForm = function() {
 		var $form = $('form#test-form');
 
@@ -196,42 +229,54 @@ $(document).ready(function() {
       var inArea = zips.includes($zip.val()) ? true : false;
       if($contact.val().includes("@") && $contact.val().includes(".")) {
         email = $contact.val();
+        email = formatEmail(email)
       } else {
         phoneNumber = $contact.val();
+        phoneNumber = formatPhone(phoneNumber);
       }
 
-      base('Leads').create({
-        "Email": email,
-        "Phone #": phoneNumber,
-        "Zip code": $zip.val(),
-        "In area?": inArea,
-        "Deal stage": "Interest",
-      }, function(err, record) {
-        if (err) { console.log(err); return; 
-        } else {
-					var title = $("input[name='contact_field']").val();
+      var filterFormula;
+      if(phoneNumber != undefined) {
+        filterFormula = `({Phone #}= '${phoneNumber}')`;
+      } else {
+        filterFormula = `({Email} = '${email}')`;
+      }
 
-          try {
-            ga('send', {
-              hitType: 'event',
-              eventCategory: 'User',
-              eventAction: 'Sign up',
-              eventLabel: title
-            });
-          } catch (e) {
-            // console.log("Caught error");
-          }
-
-          if(inArea) {
-            location.href = "/order?ref=signup";
+      findUser(filterFormula).
+        then(function(user) {
+          if(user.length > 0) {
+            location.href = "/order"
           } else {
-            var message = `
-              <div class="success">Thanks! We'll be in touch soon!</div>
-            `;
-            $("#test-form").html(message);
+            base('Leads').create({
+              "Email": email,
+              "Phone #": phoneNumber,
+              "Zip code": $zip.val(),
+              "In area?": inArea,
+              "Deal stage": "Interest",
+            }, function(err, record) {
+              if (err) { console.log(err); return; 
+              } else {
+                var title = $("input[name='contact_field']").val();
+
+                try {
+                  ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'User',
+                    eventAction: 'Sign up',
+                    eventLabel: title
+                  });
+                } catch (e) {
+                  // console.log("Caught error");
+                }
+
+                var message = `
+                  <div class="success">Thank you. We'll be in touch soon!</div>
+                `;
+                $("#test-form").html(message);
+              }
+            });
           }
-				}
-      });
+        });
 		})
 	};
 
