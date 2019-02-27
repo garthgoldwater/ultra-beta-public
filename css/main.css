@@ -106,12 +106,14 @@ main:before {
 }
 
 header {
-	max-height: 95vh;
+	max-height: calc(95vh - 50px);
 	min-height: 600px;
 	overflow: hidden;
+  margin-top: 50px;
 }
+
 .header-wrapper {
-	height: 95vh;
+	height: calc(95vh - 50px);
 	min-height: 600px;
 }
 
@@ -527,4 +529,102 @@ img.bg-logo {
 
 button:focus {
   outline: none;
+}
+
+nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  transition: background 200ms ease 0s;
+  flex-direction: column;
+  min-height: 50px;
+}
+
+nav .container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+}
+
+nav.scroll {
+  background: white;
+  box-shadow: 0 1px 1px 0 rgba(75,96,109,0.19);
+  position: fixed;
+}
+
+.nav-logo {
+  color: #fe4d89;
+  font-family: Arial Black;
+}
+
+h1, h2, h3 {
+  font-family: Arial Black;
+}
+
+.request-access {
+  background: #3b81ff !important;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: none;
+  transition: display 200ms ease 0s;
+}
+
+.scroll .request-access {
+  display: block;
+}
+
+.request-modal .form {
+  width: 80%;
+  max-width: 640px;
+  text-align: center;
+  position: relative;
+  overflow: auto;
+  flex-direction: column;
+  margin: 0 auto !important;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.request-modal {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  background: white;
+  z-index: 999;
+  display: flex;
+  display: none;
+}
+
+.modal-button {
+  margin-top: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.modal-close {
+  top: 30px;
+  right: 30px;
+  position: absolute;
+  cursor: pointer;
+}
+
+nav #flash {
+  width: 100%;
+}
+
+nav #flash .success {
+  height: 50px;
 }

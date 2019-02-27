@@ -198,13 +198,35 @@ $(document).ready(function() {
     }
   }
 
+  function validateRequestAccessForm(contact, zip, submitButtom) {
+    submitButton.prop("disabled", true);
+    submitButton.html("Submitting...");
+
+    if(contact.val() == "" && zip.val() == "") {
+      contact.attr("placeholder", "Email or phone # can't be blank");
+      contact.addClass("error");
+      zip.attr("placeholder", "Zip code can't be blank");
+      zip.addClass("error");
+      return;
+    } else if(contact.val() == "") {
+      contact.attr("placeholder", "Email or phone # can't be blank");
+      contact.addClass("error");
+      return;
+    } else if(zip.val() == "") {
+      zip.attr("placeholder", "Zip code can't be blank");
+      zip.addClass("error");
+      return;
+    }
+  }
+
 	var setupForm = function() {
 		var $form = $('form#test-form');
 
-		$('#test-form #submit-form').on('click', function(e) {
+		$('#test-form #submit-form, #modal-form #submit-form').on('click', function(e) {
 			e.preventDefault();
-      $contact = $("input#contact");
-      $zip = $("input#zip-code");
+      $form = $(e.target).parents("form");
+      $contact = $form.find("#contact");
+      $zip = $form.find("#zip-code");
 
       if($contact.val() == "" && $zip.val() == "") {
         $contact.attr("placeholder", "Email or phone # can't be blank");
@@ -222,8 +244,8 @@ $(document).ready(function() {
         return;
       }
 
-			$("#submit-form").prop("disabled", true);
-			$("#submit-form").html("Submitting...");
+			$form.find("#submit-form").prop("disabled", true);
+			$form.find("#submit-form").html("Submitting...");
 
       var email, phoneNumber, zip = "";
       var inArea = zips.includes($zip.val()) ? true : false;
@@ -269,10 +291,19 @@ $(document).ready(function() {
                   // console.log("Caught error");
                 }
 
+                $(".request-modal").css("display", "none");
                 var message = `
                   <div class="success">Thank you. We'll be in touch soon!</div>
                 `;
-                $("#test-form").html(message);
+                $("#flash").html(message);
+                setTimeout(function(){ 
+                  $("#flash .success").slideUp()
+                }, 5000);
+
+                $form.find("#submit-form").prop("disabled", false);
+                $form.find("#submit-form").html("Request Access");
+                $zip.val("");
+                $contact.val("");
               }
             });
           }
@@ -386,4 +417,21 @@ $(document).ready(function() {
 		origin: 'bottom',
 		interval: 150
 	})
+
+  window.onscroll = () => {
+    const nav = $('nav');
+    if(window.scrollY <= 10) { 
+      nav.removeClass("scroll");
+    } else {
+      nav.addClass("scroll");
+    }
+  };
+
+  $(".request-access").click(function(){
+    $(".request-modal").css("display", "flex");
+  });
+
+  $(".modal-close").click(function(){
+    $(".request-modal").css("display", "none");
+  });
 });
