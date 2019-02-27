@@ -2,6 +2,11 @@
 /* 	max-width: 25%; */
 /* } */
 
+@font-face {
+  font-family: ArialBlack;
+  src: url('Arial Black.ttf');
+}
+
 *, html {
 	font-family: 'Roboto', sans-serif;
 }
@@ -561,11 +566,11 @@ nav.scroll {
 
 .nav-logo {
   color: #fe4d89;
-  font-family: Arial Black;
+  font-family: ArialBlack;
 }
 
 h1, h2, h3 {
-  font-family: Arial Black;
+  font-family: ArialBlack;
 }
 
 .request-access {

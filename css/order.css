@@ -83,10 +83,11 @@
       margin-bottom: 15px;
   }
   .cart-wrapper {
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
     flex-direction: column;
-    align-self: flex-end;
+    display: flex;
+    width: 100%;
   }
 
   .cart-icon {
@@ -119,7 +120,7 @@
     border-radius: initial !important;
     padding: initial !important;
     padding-bottom: initial !important;
-    width: initial !important;
+    /* width: initial !important; */
     box-shadow: initial !important;
     margin: initial !important;
     overflow: initial !important;
