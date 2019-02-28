@@ -80,6 +80,16 @@ $(document).ready(function() {
 		return chip;
 	};
 
+  var signUpFacebook = function() {
+    try {
+      fbq('track', 'CompleteRegistration');
+      console.log("TRIED");
+    } catch (e) {
+      console.log("Caught error");
+      console.log(e);
+    }
+  };
+
 	var renderSeltzer = function(record) {
 		var flavors = record.get("Flavors").map(flavor => flavor.trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/, "").replace(/\s/g, "-"));
 		var brand = record.get("Brand").trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/, "").replace(/\s/g, "-");
@@ -287,6 +297,7 @@ $(document).ready(function() {
                     eventAction: 'Sign up',
                     eventLabel: title
                   });
+                  signUpFacebook();
                 } catch (e) {
                   // console.log("Caught error");
                 }
